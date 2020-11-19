@@ -1,6 +1,9 @@
 ;; Get the auth token from Local
 (require 'json)
 
+(setq lwp-sites-buffer-name "*Local Sites*")
+(setq lwp-sites-buffer (get-buffer-create lwp-sites-buffer-name))
+
 (message "\nReading Local GraphQL config.")
 
 ;; Where Local stores the graphql config. This is the macOS default which is different than Win or Linux.
@@ -47,5 +50,7 @@
   :parser 'json-read
   :complete (cl-function
 	     (lambda (&key response &allow-other-keys)
-	       (message "Done: %s" (request-response-data response)))))
+	       (set-buffer lwp-sites-buffer)
+	       (insert (format "%s" (request-response-data response)))
+	    )))
 
