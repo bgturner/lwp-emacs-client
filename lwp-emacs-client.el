@@ -33,9 +33,9 @@
 (request
   lwp-graphql-url
   :type "POST"
-  :headers '(
+  :headers `(
 	     ("Content-Type" . "application/json")
-	     ("Authorization" . "Bearer kTe4tOu8J9glqG8bDklYey7nx623qXO+yh54duXUExJ1XeJGxvFOo6MAdOWdP5CBepTekj7p6if06hsyF4Zwcr0BcseoWratYlH39aoShtrJElJetMsPVX8+S3N9WToE")
+	     ("Authorization" . ,(format "Bearer %s" lwp-graphql-authToken))
 	     )
   :data (json-encode '(("query" . "{
     sites {
